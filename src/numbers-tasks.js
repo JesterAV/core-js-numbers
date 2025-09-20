@@ -201,9 +201,7 @@ function isPrime(n) {
   if (n === 2) return true;
   if (n % 2 === 0) return false;
 
-  const limit = Math.sqrt(n);
-
-  for (let i = 3; i <= limit; i += 2) {
+  for (let i = 3; i <= Math.sqrt(n); i += 2) {
     if (n % i === 0) return false;
   }
 
@@ -465,8 +463,9 @@ function getFloatOnString(/* str */) {
  * '1.234', 2           => 1
  * '10', 8              => 8
  */
-function getIntegerOnString(/* str, base */) {
-  throw new Error('Not implemented');
+function getIntegerOnString(str, base) {
+  const result = Number.parseInt(str, base);
+  return Number.isNaN(result) ? NaN : result;
 }
 
 /**
@@ -480,8 +479,8 @@ function getIntegerOnString(/* str, base */) {
  * 3.5      => false
  * 2 ** 53  => false
  */
-function isSafeInteger(/* number */) {
-  throw new Error('Not implemented');
+function isSafeInteger(number) {
+  return Boolean(Number.isInteger(number) && Number.isSafeInteger(number));
 }
 
 /**
